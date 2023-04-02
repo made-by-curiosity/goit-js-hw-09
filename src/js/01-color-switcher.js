@@ -4,8 +4,6 @@ const refs = {
   body: document.querySelector('body'),
 };
 
-console.dir(refs.startBtn);
-
 const CHANGE_COLOR_TIME = 1000;
 let intervalId = null;
 refs.startBtn.disabled = false;
