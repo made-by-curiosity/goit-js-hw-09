@@ -10,10 +10,34 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
-  background-color: tomato;
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+.color-switcher {
+  min-width: 50vw;
+  min-height: 50vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.js-switcher-btn {
+  width: 100px;
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid gray;
+  border-radius: 1px;
+
+  text-transform: uppercase;
 }
