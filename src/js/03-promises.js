@@ -31,6 +31,8 @@ function onPromiseBtnClick(e) {
     return;
   }
 
+  btnDisable(firstDelay, delayStep, amount);
+
   for (let i = 1; i <= amount; i += 1) {
     if (promiseTimeout < 0) {
       showTimeoutNotification();
@@ -92,4 +94,12 @@ function showTooManyPromisesNotification() {
   const message = `Ну это слишком! Вы уверены, что вам нужно столько промисов? Я бы не выбирал больше 100`;
 
   Notiflix.Notify.warning(message);
+}
+
+function btnDisable(firstDelay, delayStep, amount) {
+  refs.createPromisesBtn.disabled = true;
+  const totalTime = firstDelay + Math.abs(delayStep) * amount;
+  setTimeout(() => {
+    refs.createPromisesBtn.disabled = false;
+  }, totalTime);
 }
