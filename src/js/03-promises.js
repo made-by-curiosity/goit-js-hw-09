@@ -22,7 +22,11 @@ function onPromiseBtnClick(e) {
     return;
   }
 
-  if (firstDelay <= 0 || delayStep === 0 || amount <= 0) {
+  if (
+    refs.firstDelayInput.value === '' ||
+    refs.delayStepInput.value === '' ||
+    amount <= 0
+  ) {
     showEmptyFieldsNotification();
     return;
   }
@@ -73,7 +77,7 @@ function showErrorNotification(position, delay) {
 }
 
 function showEmptyFieldsNotification() {
-  const message = `Все поля должны быть заполнены, а First delay и Amount должны быть больше 0`;
+  const message = `Все поля должны быть заполнены, а Amount должен быть больше 0`;
 
   Notiflix.Notify.warning(message);
 }
