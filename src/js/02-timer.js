@@ -24,6 +24,7 @@ const options = {
       return;
     }
     if (selectedDates[0].getTime() < Date.now()) {
+      refs.startBtn.disabled = true;
       showOnWrongDateNotification();
       this.clear();
       return;
@@ -41,21 +42,21 @@ refs.startBtn.addEventListener('click', onStartBtnClick);
 
 function onStartBtnClick() {
   if (isTimerActive) {
+    showReloadNotification();
     return;
   }
   timePicker.input.disabled = true;
   isTimerActive = true;
 
   showOnTimerStartNotification();
+  updateTime();
+}
 
-  setTimeout(() => {
-    showReloadNotification();
-  }, 10000);
-
+function updateTime() {
   const timerId = setInterval(() => {
     const pickedTime = timePicker.selectedDates[0].getTime();
     const currentTime = Date.now();
-    let deltaTime = pickedTime - currentTime;
+    const deltaTime = pickedTime - currentTime;
     const convertedTime = convertMs(deltaTime);
 
     updateTimerElements(convertedTime);
@@ -116,7 +117,7 @@ function showOnWrongDateNotification() {
 }
 
 function showOnNoDateNotification() {
-  const message = 'Вы не выбрали время и дату!';
+  const message = 'Вы не выбрали дату и время!';
 
   Notiflix.Notify.failure(message);
 }
