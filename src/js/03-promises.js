@@ -17,7 +17,22 @@ function onPromiseBtnClick(e) {
 
   e.preventDefault();
 
+  if (amount > 100) {
+    showTooManyPromisesNotification();
+    return;
+  }
+
+  if (firstDelay <= 0 || delayStep === 0 || amount <= 0) {
+    showEmptyFieldsNotification();
+    return;
+  }
+
   for (let i = 1; i <= amount; i += 1) {
+    if (promiseTimeout < 0) {
+      showTimeoutNotification();
+      break;
+    }
+
     createPromise(i, promiseTimeout)
       .then(({ position, delay }) => {
         showSuccessNotification(position, delay);
@@ -55,4 +70,22 @@ function showErrorNotification(position, delay) {
   const message = `❌ Rejected promise ${position} in ${delay}ms`;
 
   Notiflix.Notify.failure(message);
+}
+
+function showEmptyFieldsNotification() {
+  const message = `Все поля должны быть заполнены, а First delay и Amount должны быть больше 0`;
+
+  Notiflix.Notify.warning(message);
+}
+
+function showTimeoutNotification() {
+  const message = `Время таймаута не может быть меньше 0. Пожалуйста, выберите другие значения`;
+
+  Notiflix.Notify.warning(message);
+}
+
+function showTooManyPromisesNotification() {
+  const message = `Ну это слишком! Вы уверены, что вам нужно столько промисов? Я бы не выбирал больше 100`;
+
+  Notiflix.Notify.warning(message);
 }
